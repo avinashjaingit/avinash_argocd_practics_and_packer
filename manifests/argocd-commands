@@ -1,0 +1,1 @@
+k -n argocd port-forward svc/argocd-server 8090:80

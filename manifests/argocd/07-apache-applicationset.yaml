@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apache-apps
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: 'https://github.com/avinashjaingit/avinash_argocd_practics' # Placeholder
+      revision: master
+      directories:
+      - path: apps/apache
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/avinashjaingit/avinash_argocd_practics' # Placeholder
+        targetRevision: master
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}-poc'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
