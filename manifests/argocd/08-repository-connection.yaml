@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: private-repo-creds
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  # REPLACE with your actual repository URL
+  url: https://github.com/avinashjaingit/avinash_argocd_practics
+  
+  # For PRIVATE Repositories (HTTPS), uncomment and fill these:
+  # username: your-git-username
+  # password: your-git-personal-access-token
